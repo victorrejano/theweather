@@ -11,6 +11,6 @@ import Foundation
 struct Forecast {
     
     let place: Place
-    let weather: [Weather]
+    let weather: Weather
     
 }

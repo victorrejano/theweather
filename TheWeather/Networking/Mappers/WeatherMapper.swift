@@ -1,5 +1,5 @@
 //
-//  WeatherInfoMapper.swift
+//  WeatherMapper.swift
 //  TheWeather
 //
 //  Created by Victor on 29/08/2019.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class WeatherInfoMapper {
+final class WeatherMapper {
     
     class func map(_ apiResponse: WeatherMapAPIResponse) -> Weather {
         return Weather(

@@ -14,7 +14,7 @@ class WeatherDescTests: XCTestCase {
     lazy var encoder: JSONEncoder! = { JSONEncoder() }()
     lazy var decoder: JSONDecoder! = { JSONDecoder() }()
     
-    let resourceName: String = "weather"
+    let resourceName: String = "weatherDesc"
     
     override func setUp() {
         guard let dataURL = Bundle.main.url(forResource: resourceName, withExtension: "json")

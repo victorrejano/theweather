@@ -10,7 +10,7 @@ import Foundation
 
 struct OpenWeatherAPIConstants {
     static let API_KEY = "1da4e42e3b577469204fe4489085126e"
-    static let URL_BASE = "samples.openweathermap.org"
+    static let URL_BASE = "api.openweathermap.org"
 }
 
 struct GoogleServicesConstants {

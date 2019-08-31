@@ -22,8 +22,12 @@ final class OpenWeatherAPI: APIController {
         var components = URLComponents()
         components.scheme = "https"
         components.host = _urlBase
-        components.path = "data/2.5/\(path)"
+        components.path = "/data/2.5/\(path)"
         components.queryItems = [URLQueryItem(name: "appid", value: _apiKey)]
+        components.queryItems?.append(contentsOf: params.map {
+            (key, value) in
+            return (URLQueryItem(name: key, value: value))
+        })
         return components.url
     }
     

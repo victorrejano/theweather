@@ -13,7 +13,7 @@ final class WeatherRepository {
     fileprivate static var _shared = WeatherRepository()
     fileprivate var provider: WeatherProvider!
     
-    class func getInstance(origin: Provider?) -> WeatherRepository {
+    class func getInstance(_ origin: Provider = nil) -> WeatherRepository {
         
         // If user specifies origin
         if let origin = origin {

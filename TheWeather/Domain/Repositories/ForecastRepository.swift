@@ -21,12 +21,32 @@ final class ForecastRepository {
 
 extension ForecastRepository {
     
-    func getForecastFor(place: Place, success: onSuccess<Forecast>, failure: onFailure) {
+    func getForecastFor(place: Place, success: @escaping onSuccess<Forecast>, failure: @escaping onFailure) {
         
+        weatherRepository.getCurrentWeatherFor(place, success: {
+            result, message in
+            
+            guard let weather = result else {
+                failure(CustomError(code: nil, message: "No weather found"))
+                return
+            }
+            
+            let forecast = Forecast(
+                place: place,
+                weather: weather
+            )
+            
+            success(forecast, message)
+            
+        }, failure: {
+            error in
+            failure(CustomError(code: nil, message: error.message))
+        })
     }
     
-    func getForecastFor(place: Place, mtsAhead: Double? = nil, direction: CardinalDirection, success: onSuccess<Forecast>, failure: onFailure) {
+    func getForecastFor(place: Place, mtsAhead: Double? = nil, direction: CardinalDirection, success: @escaping onSuccess<Forecast>, failure: @escaping onFailure) {
         
-        
+        let newPlace = PlaceCalculatorHelper.calculate(origin: place, cardinalDirection: direction)
+        getForecastFor(place: newPlace, success: success, failure: failure)
     }
 }

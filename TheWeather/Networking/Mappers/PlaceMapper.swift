@@ -15,8 +15,8 @@ final class PlaceMapper {
         
         return Place(
             name: apiResponse.name,
-            location: apiResponse.location,
-            zipcode: nil)
+            location: apiResponse.location
+        )
         
     }
     
@@ -24,7 +24,7 @@ final class PlaceMapper {
         
         return Place(name: googlePlace.name,
                      location: Location(lat: googlePlace.coordinate.latitude,
-                                        lon: googlePlace.coordinate.longitude),
-                     zipcode: nil)
+                                        lon: googlePlace.coordinate.longitude)
+        )
     }
 }

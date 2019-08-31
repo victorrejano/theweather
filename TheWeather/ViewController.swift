@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet weak var mapView: GMSMapView!
+    let repository = WeatherRepository.getInstance()
     
     // MARK - Lifecycle
     override func viewDidLoad() {
@@ -70,7 +71,7 @@ class ViewController: UIViewController {
         
         // Specify a filter.
         let filter = GMSAutocompleteFilter()
-        filter.type = .city
+        filter.type = .region
         autocompleteController.autocompleteFilter = filter
         
         // Display the autocomplete view controller.
@@ -92,6 +93,31 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
         // move map
         addMarkToMap(place: selectedPlace)
         moveMapPositionTo(place: selectedPlace)
+        
+        repository.getCurrentWeatherFor(newPlace,
+        success: {
+            [weak self]
+            (result, message) in
+            
+            if let weather = result {
+            
+                let ac = UIAlertController(title: self?.selectedPlace.name!, message: "\(weather.temperature!.current)", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                self?.present(ac, animated: true)
+                return
+            }
+            
+            
+                                            
+        }, failure: {
+            [weak self]
+            error in
+            
+            let ac = UIAlertController(title: "Error", message: error.message, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            self?.present(ac, animated: true)
+            
+        })
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {

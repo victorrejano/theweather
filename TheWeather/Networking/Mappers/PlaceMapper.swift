@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import GooglePlaces
 
 final class PlaceMapper {
     
@@ -17,5 +18,13 @@ final class PlaceMapper {
             location: apiResponse.location,
             zipcode: nil)
         
+    }
+    
+    class func map(_ googlePlace: GMSPlace) -> Place {
+        
+        return Place(name: googlePlace.name,
+                     location: Location(lat: googlePlace.coordinate.latitude,
+                                        lon: googlePlace.coordinate.longitude),
+                     zipcode: nil)
     }
 }

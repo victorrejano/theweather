@@ -10,7 +10,6 @@ import Foundation
 
 final class OpenWeatherAPI: APIController {
     
-    static let shared = OpenWeatherAPI()
     var _urlBase: String {
         return OpenWeatherAPIConstants.URL_BASE
     }
@@ -28,7 +27,7 @@ final class OpenWeatherAPI: APIController {
         return components.url
     }
     
-    private init() {}
+    init() {}
     
 }
 

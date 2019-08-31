@@ -7,3 +7,26 @@
 //
 
 import Foundation
+
+final class ForecastRepository {
+    
+    fileprivate weak var weatherRepository: WeatherRepository!
+    static let shared = ForecastRepository()
+    
+    private init() {
+        weatherRepository = WeatherRepository.getInstance()
+    }
+    
+}
+
+extension ForecastRepository {
+    
+    func getForecastFor(place: Place, success: onSuccess<Forecast>, failure: onFailure) {
+        
+    }
+    
+    func getForecastFor(place: Place, mtsAhead: Double? = nil, direction: CardinalDirection, success: onSuccess<Forecast>, failure: onFailure) {
+        
+        
+    }
+}

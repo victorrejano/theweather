@@ -12,7 +12,7 @@ struct Place {
     
     let name: String?
     let location: Location
-    let zipcode: String?
+
 }
 
 extension Place: Equatable {

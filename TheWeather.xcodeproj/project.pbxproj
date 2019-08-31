@@ -17,7 +17,6 @@
 		991A924D231984B7009AE82D /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991A924C231984B7009AE82D /* APIController.swift */; };
 		99259E4D2319912200CE0D44 /* OpenWeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99259E4C2319912200CE0D44 /* OpenWeatherAPI.swift */; };
 		99259E52231994B400CE0D44 /* WeatherRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99259E51231994B400CE0D44 /* WeatherRepository.swift */; };
-		99259E54231994C400CE0D44 /* PlacesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99259E53231994C400CE0D44 /* PlacesRepository.swift */; };
 		99259E57231995D400CE0D44 /* BuildConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99259E56231995D400CE0D44 /* BuildConfig.swift */; };
 		99573831231844030052D613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99573830231844030052D613 /* AppDelegate.swift */; };
 		99573833231844030052D613 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99573832231844030052D613 /* ViewController.swift */; };
@@ -82,7 +81,6 @@
 		991A924C231984B7009AE82D /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
 		99259E4C2319912200CE0D44 /* OpenWeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherAPI.swift; sourceTree = "<group>"; };
 		99259E51231994B400CE0D44 /* WeatherRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRepository.swift; sourceTree = "<group>"; };
-		99259E53231994C400CE0D44 /* PlacesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesRepository.swift; sourceTree = "<group>"; };
 		99259E56231995D400CE0D44 /* BuildConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildConfig.swift; sourceTree = "<group>"; };
 		9957382D231844030052D613 /* TheWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99573830231844030052D613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -287,7 +285,6 @@
 			isa = PBXGroup;
 			children = (
 				99259E51231994B400CE0D44 /* WeatherRepository.swift */,
-				99259E53231994C400CE0D44 /* PlacesRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -427,6 +424,7 @@
 				9957382A231844030052D613 /* Frameworks */,
 				9957382B231844030052D613 /* Resources */,
 				B6FBC90A107C85D35AE54E79 /* [CP] Embed Pods Frameworks */,
+				97FF0BB901C91DB9C983DC49 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -527,6 +525,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		97FF0BB901C91DB9C983DC49 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TheWeather/Pods-TheWeather-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TheWeather/Pods-TheWeather-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TheWeather/Pods-TheWeather-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A2EA5E4064AA7656F4971612 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -596,7 +611,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				99573858231844680052D613 /* ClimateMeasurement.swift in Sources */,
-				99259E54231994C400CE0D44 /* PlacesRepository.swift in Sources */,
 				99573859231844680052D613 /* Location.swift in Sources */,
 				9957388923185EC70052D613 /* Place.swift in Sources */,
 				991A923A23193EDA009AE82D /* PlacesProvider.swift in Sources */,

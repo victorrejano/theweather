@@ -5,8 +5,10 @@ target 'TheWeather' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'Alamofire'
   # Pods for TheWeather
+  pod 'Alamofire'
+  pod 'GooglePlaces'
+  pod 'GoogleMaps'
 
   target 'TheWeatherTests' do
     inherit! :search_paths

@@ -24,6 +24,8 @@ final class OpenWeatherAPI: APIController {
         components.host = _urlBase
         components.path = "/data/2.5/\(path)"
         components.queryItems = [URLQueryItem(name: "appid", value: _apiKey)]
+        components.queryItems?.append(URLQueryItem(name: "lang", value: Locale.current.languageCode ?? "en"))
+        components.queryItems?.append(URLQueryItem(name: "units", value: "metric"))
         components.queryItems?.append(contentsOf: params.map {
             (key, value) in
             return (URLQueryItem(name: key, value: value))

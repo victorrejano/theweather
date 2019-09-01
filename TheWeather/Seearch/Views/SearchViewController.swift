@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import GooglePlaces
 import GoogleMaps
 
 class SearchViewController: UIViewController {
@@ -24,13 +23,13 @@ class SearchViewController: UIViewController {
         }
     }
     fileprivate var forecastTableViewAdapter: ForecastTableViewAdapter!
+    fileprivate let repository = ForecastRepository.shared
+    fileprivate var googleSearchController: GoogleSearchController!
     
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var tableView: UITableView!
-    
-    let repository = ForecastRepository.shared
     
     // MARK - Lifecycle
     override func viewDidLoad() {
@@ -50,13 +49,16 @@ class SearchViewController: UIViewController {
         mapView.addSubview(map)
         
         // Search button
-        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(autocompleteClicked(_:)))
+        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonSelected(_:)))
         navigationItem.rightBarButtonItem = searchButton
         
         // TableView setup
         forecastTableViewAdapter = ForecastTableViewAdapter(delegate: self, tableView: tableView)
         tableView.dataSource = forecastTableViewAdapter
         tableView.delegate = forecastTableViewAdapter
+        
+        // Google Search
+        googleSearchController = GoogleSearchController(delegate: self)
         
     }
     
@@ -85,23 +87,12 @@ class SearchViewController: UIViewController {
         mapView.selectedMarker = marker
     }
     
-    @objc func autocompleteClicked(_ sender: UIButton) {
-        let autocompleteController = GMSAutocompleteViewController()
-        autocompleteController.delegate = self
+    @objc func searchButtonSelected(_ sender: UIButton) {
         
-        // Specify the place data types to return.
-        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-            UInt(GMSPlaceField.placeID.rawValue) |
-            UInt(GMSPlaceField.coordinate.rawValue))!
-        autocompleteController.placeFields = fields
-        
-        // Specify a filter.
-        let filter = GMSAutocompleteFilter()
-        filter.type = .region
-        autocompleteController.autocompleteFilter = filter
+        let autocompleteView = googleSearchController.setupAutocomplete()
         
         // Display the autocomplete view controller.
-        present(autocompleteController, animated: true, completion: nil)
+        present(autocompleteView, animated: true, completion: nil)
     }
     
     private func showLoadingView() {
@@ -111,8 +102,16 @@ class SearchViewController: UIViewController {
     private func hideLoadingView() {
         activityIndicator.isHidden = true
     }
+    
+    private func showErrorView() {
+        let ac = UIAlertController(title: "Error", message: "Couldn't retrieve data, try it again later", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        present(ac, animated: true)
+    }
 }
 
+// MARK - Delegates
 extension SearchViewController: ForecastTableViewAdapterDelegate {
     
     func didSelectRow(index: IndexPath, selection: Forecast) {
@@ -121,18 +120,20 @@ extension SearchViewController: ForecastTableViewAdapterDelegate {
     }
 }
 
-// MARK - GMSDelegate
-extension SearchViewController: GMSAutocompleteViewControllerDelegate {
+extension SearchViewController: GoogleSearchControllerDelegate {
     
-    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+    func cancelledSearch() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func didSelectPlace(selection: Place) {
         
         dismiss(animated: true, completion: nil)
         
         showLoadingView()
         
         // save selected place
-        let newPlace = PlaceMapper.map(place)
-        selectedPlace = newPlace
+        selectedPlace = selection
         
         repository.getForecastFromCardinalPoints(origin: selectedPlace, success: {
             [weak self]
@@ -141,17 +142,15 @@ extension SearchViewController: GMSAutocompleteViewControllerDelegate {
             self?.hideLoadingView()
             
             guard let forecasts = results else {
+                
                 self?.hideLoadingView()
-                let ac = UIAlertController(title: "Error", message: "Couldn't retrieve data, try it again later", preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "OK", style: .default))
-                self?.present(ac, animated: true)
+                self?.showErrorView()
                 return
             }
             
             forecasts.forEach {
                 forecast in
                 self?.retrievedForecasts = results!
-                self?.tableView.reloadData()
                 self?.stackView.isHidden = false
                 
                 // show location as selected
@@ -174,28 +173,8 @@ extension SearchViewController: GMSAutocompleteViewControllerDelegate {
                 [weak self]
                 error in
                 
-                let ac = UIAlertController(title: "Error", message: "Couldn't retrieve data, try it again later", preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "OK", style: .default))
-                self?.present(ac, animated: true)
-                
                 self?.hideLoadingView()
+                self?.showErrorView()
         })
-    }
-    
-    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-        print("Error: ", error.localizedDescription)
-    }
-    
-    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    // Turn the network activity indicator on and off again.
-    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-    }
-    
-    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }

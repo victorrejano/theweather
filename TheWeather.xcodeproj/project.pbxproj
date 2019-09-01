@@ -61,6 +61,7 @@
 		99B013EF231C15C60042AEEC /* ForecastQualifierController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B013EE231C15C60042AEEC /* ForecastQualifierController.swift */; };
 		99B013F2231C245D0042AEEC /* ForecastTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B013F1231C245D0042AEEC /* ForecastTableViewAdapter.swift */; };
 		99B013F6231C2F140042AEEC /* ForecastQualifierControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B013F5231C2F140042AEEC /* ForecastQualifierControllerTests.swift */; };
+		99B013F9231C35C50042AEEC /* GoogleSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B013F8231C35C50042AEEC /* GoogleSearchController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +130,7 @@
 		99B013EE231C15C60042AEEC /* ForecastQualifierController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastQualifierController.swift; sourceTree = "<group>"; };
 		99B013F1231C245D0042AEEC /* ForecastTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewAdapter.swift; sourceTree = "<group>"; };
 		99B013F5231C2F140042AEEC /* ForecastQualifierControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastQualifierControllerTests.swift; sourceTree = "<group>"; };
+		99B013F8231C35C50042AEEC /* GoogleSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSearchController.swift; sourceTree = "<group>"; };
 		D925A4F2BC1CB2A5026A4E14 /* Pods-TheWeatherTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheWeatherTests.release.xcconfig"; path = "Target Support Files/Pods-TheWeatherTests/Pods-TheWeatherTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -447,6 +449,7 @@
 			children = (
 				99B013EE231C15C60042AEEC /* ForecastQualifierController.swift */,
 				99B013F1231C245D0042AEEC /* ForecastTableViewAdapter.swift */,
+				99B013F8231C35C50042AEEC /* GoogleSearchController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -703,6 +706,7 @@
 				991A923823193EC6009AE82D /* WeatherProvider.swift in Sources */,
 				991A924D231984B7009AE82D /* APIController.swift in Sources */,
 				99573831231844030052D613 /* AppDelegate.swift in Sources */,
+				99B013F9231C35C50042AEEC /* GoogleSearchController.swift in Sources */,
 				99573890231860DC0052D613 /* PlaceMapper.swift in Sources */,
 				9957388B23185F760052D613 /* Weather.swift in Sources */,
 				991A924223194A06009AE82D /* HumidityMapper.swift in Sources */,

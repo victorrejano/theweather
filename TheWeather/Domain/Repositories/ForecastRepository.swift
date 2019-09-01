@@ -49,4 +49,5 @@ extension ForecastRepository {
         let newPlace = PlaceCalculatorHelper.calculate(origin: place, cardinalDirection: direction)
         getForecastFor(place: newPlace, success: success, failure: failure)
     }
+    
 }

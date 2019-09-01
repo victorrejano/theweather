@@ -18,8 +18,12 @@ class SearchViewController: UIViewController {
             title = "Forecast around \(selectedPlace.name!)"
         }
     }
-    fileprivate var retrievedForecasts: [Forecast]! = []
-    fileprivate let forecastQualifierController = ForecastQualifierController()
+    fileprivate var retrievedForecasts: [Forecast]! = [] {
+        didSet {
+            forecastTableViewAdapter.replaceData(data: retrievedForecasts)
+        }
+    }
+    fileprivate var forecastTableViewAdapter: ForecastTableViewAdapter!
     
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -38,6 +42,8 @@ class SearchViewController: UIViewController {
     // MARK - View methods
     fileprivate func prepareView() {
         
+        title = "Search weather info"
+        
         // Initial map's position
         let camera = GMSCameraPosition.camera(withLatitude: 0.0, longitude: 0.0, zoom: 0.0)
         let map = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
@@ -47,10 +53,11 @@ class SearchViewController: UIViewController {
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(autocompleteClicked(_:)))
         navigationItem.rightBarButtonItem = searchButton
         
-        tableView.dataSource = self
-        tableView.delegate = self
+        // TableView setup
+        forecastTableViewAdapter = ForecastTableViewAdapter(delegate: self, tableView: tableView)
+        tableView.dataSource = forecastTableViewAdapter
+        tableView.delegate = forecastTableViewAdapter
         
-        title = "Search weather info"
     }
     
     fileprivate func moveMapPositionTo(place: Place) {
@@ -78,7 +85,6 @@ class SearchViewController: UIViewController {
         mapView.selectedMarker = marker
     }
     
-    // Present the Autocomplete view controller when the button is pressed.
     @objc func autocompleteClicked(_ sender: UIButton) {
         let autocompleteController = GMSAutocompleteViewController()
         autocompleteController.delegate = self
@@ -98,18 +104,26 @@ class SearchViewController: UIViewController {
         present(autocompleteController, animated: true, completion: nil)
     }
     
-    func showLoadingView() {
+    private func showLoadingView() {
         activityIndicator.isHidden = false
     }
     
-    func hideLoadingView() {
+    private func hideLoadingView() {
         activityIndicator.isHidden = true
+    }
+}
+
+extension SearchViewController: ForecastTableViewAdapterDelegate {
+    
+    func didSelectRow(index: IndexPath, selection: Forecast) {
+        moveMapPositionTo(place: selection.place)
+        addMarkToMap(forecast: selection)
     }
 }
 
 // MARK - GMSDelegate
 extension SearchViewController: GMSAutocompleteViewControllerDelegate {
-    // Handle the user's selection.
+    
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         
         dismiss(animated: true, completion: nil)
@@ -169,11 +183,9 @@ extension SearchViewController: GMSAutocompleteViewControllerDelegate {
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-        // TODO: handle the error.
         print("Error: ", error.localizedDescription)
     }
     
-    // User canceled the operation.
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
         dismiss(animated: true, completion: nil)
     }
@@ -186,86 +198,4 @@ extension SearchViewController: GMSAutocompleteViewControllerDelegate {
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
-    
-}
-
-extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return retrievedForecasts.isEmpty ? 0 : 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ForecastInfoCell", for: indexPath)
-        
-        forecastQualifierController.replaceForecasts(retrievedForecasts)
-        
-        switch indexPath.section {
-        case 0:
-            let forecast = forecastQualifierController.getForecastWithQualifier(.moreTemperature)
-            cell.textLabel?.text = forecast.place.name!
-            cell.detailTextLabel?.text = "\(forecast.weather.temperature!.current) ºC"
-            cell.imageView?.image = UIImage(named: "temperature-icon")
-        case 1:
-            let forecast = forecastQualifierController.getForecastWithQualifier(.moreWind)
-            cell.textLabel?.text = forecast.place.name!
-            cell.detailTextLabel?.text = "\(forecast.weather.wind!.speed) kms/h"
-            cell.imageView?.image = UIImage(named: "wind-icon")
-        case 2:
-            let forecast = forecastQualifierController.getForecastWithQualifier(.moreHumidity)
-            cell.textLabel?.text = forecast.place.name!
-            cell.detailTextLabel?.text = "\(forecast.weather.humidity!.percentage) º%"
-            cell.imageView?.image = UIImage(named: "humidity-icon")
-        case 3:
-            let forecast = forecastQualifierController.getForecastWithQualifier(.moreRain)
-            cell.textLabel?.text = forecast.place.name!
-            cell.detailTextLabel?.text = forecast.weather.rain != nil ? "\(forecast.weather.rain!.lastHour) mm" : "0 mm"
-            cell.imageView?.image = UIImage(named: "rain-icon")
-        default:
-            break
-        }
-        
-        return cell
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        var forecast: Forecast!
-        
-        switch indexPath.section {
-        case 0:
-            forecast = forecastQualifierController.getForecastWithQualifier(.moreTemperature)
-        case 1:
-            forecast = forecastQualifierController.getForecastWithQualifier(.moreWind)
-        case 2:
-            forecast = forecastQualifierController.getForecastWithQualifier(.moreHumidity)
-        case 3:
-            forecast = forecastQualifierController.getForecastWithQualifier(.moreRain)
-        default:
-            break
-        }
-        
-        moveMapPositionTo(place: forecast.place)
-        addMarkToMap(forecast: forecast)
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        switch section {
-        case 0:
-            return "Highest temperature"
-        case 1:
-            return "Highest wind"
-        case 2:
-            return "Highest humidity"
-        case 3:
-            return "Highest rain"
-        default:
-            return ""
-        }
-    }
-    
 }

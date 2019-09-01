@@ -10,6 +10,9 @@ import Foundation
 
 final class ForecastQualifierController {
     private var _forecasts: [Forecast]!
+    var count: Int {
+        return _forecasts.count
+    }
     
     init() {
         _forecasts = []

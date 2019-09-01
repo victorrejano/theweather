@@ -59,6 +59,7 @@
 		9957389723186B990052D613 /* Int+toDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957389623186B990052D613 /* Int+toDate.swift */; };
 		9957389B23187D0E0052D613 /* PlaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957389A23187D0E0052D613 /* PlaceTests.swift */; };
 		99B013EF231C15C60042AEEC /* ForecastQualifierController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B013EE231C15C60042AEEC /* ForecastQualifierController.swift */; };
+		99B013F2231C245D0042AEEC /* ForecastTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B013F1231C245D0042AEEC /* ForecastTableViewAdapter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +126,7 @@
 		9957389623186B990052D613 /* Int+toDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+toDate.swift"; sourceTree = "<group>"; };
 		9957389A23187D0E0052D613 /* PlaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTests.swift; sourceTree = "<group>"; };
 		99B013EE231C15C60042AEEC /* ForecastQualifierController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastQualifierController.swift; sourceTree = "<group>"; };
+		99B013F1231C245D0042AEEC /* ForecastTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewAdapter.swift; sourceTree = "<group>"; };
 		D925A4F2BC1CB2A5026A4E14 /* Pods-TheWeatherTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheWeatherTests.release.xcconfig"; path = "Target Support Files/Pods-TheWeatherTests/Pods-TheWeatherTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -433,6 +435,7 @@
 			children = (
 				99573834231844030052D613 /* Main.storyboard */,
 				99573832231844030052D613 /* SearchViewController.swift */,
+				99B013F1231C245D0042AEEC /* ForecastTableViewAdapter.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -678,6 +681,7 @@
 				991A924223194A06009AE82D /* HumidityMapper.swift in Sources */,
 				99259E4D2319912200CE0D44 /* OpenWeatherAPI.swift in Sources */,
 				991A9240231948E4009AE82D /* Forecast.swift in Sources */,
+				99B013F2231C245D0042AEEC /* ForecastTableViewAdapter.swift in Sources */,
 				99B013EF231C15C60042AEEC /* ForecastQualifierController.swift in Sources */,
 				99573860231846D30052D613 /* Rain.swift in Sources */,
 				99259E52231994B400CE0D44 /* WeatherRepository.swift in Sources */,

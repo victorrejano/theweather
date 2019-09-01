@@ -13,7 +13,7 @@ struct Forecast {
     let place: Place
     let weather: Weather
     
-    enum Qualifier {
+    enum Qualifier: Int, CaseIterable {
         case moreWind
         case moreTemperature
         case moreRain

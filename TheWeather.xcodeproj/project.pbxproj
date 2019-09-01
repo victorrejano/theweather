@@ -435,7 +435,6 @@
 			children = (
 				99573834231844030052D613 /* Main.storyboard */,
 				99573832231844030052D613 /* SearchViewController.swift */,
-				99B013F1231C245D0042AEEC /* ForecastTableViewAdapter.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -444,6 +443,7 @@
 			isa = PBXGroup;
 			children = (
 				99B013EE231C15C60042AEEC /* ForecastQualifierController.swift */,
+				99B013F1231C245D0042AEEC /* ForecastTableViewAdapter.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

@@ -42,7 +42,7 @@ final class ForecastQualifierController {
                 $0.weather.temperature != nil
             }
             .max { forecast, otherForecast -> Bool in
-                forecast.weather.temperature!.current > otherForecast.weather.temperature!.current
+                forecast.weather.temperature!.current < otherForecast.weather.temperature!.current
             }
             ?? _forecasts.first!
     }
@@ -53,7 +53,7 @@ final class ForecastQualifierController {
                 $0.weather.humidity != nil
             }
             .max { forecast, otherForecast -> Bool in
-                forecast.weather.humidity!.percentage > otherForecast.weather.humidity!.percentage
+                forecast.weather.humidity!.percentage < otherForecast.weather.humidity!.percentage
             }
             ?? _forecasts.first!
     }
@@ -64,7 +64,7 @@ final class ForecastQualifierController {
                 $0.weather.rain != nil
             }
             .max { forecast, otherForecast -> Bool in
-                forecast.weather.rain!.lastHour > otherForecast.weather.rain!.lastHour
+                forecast.weather.rain!.lastHour < otherForecast.weather.rain!.lastHour
             }
             ?? _forecasts.first!
     }
@@ -75,7 +75,7 @@ final class ForecastQualifierController {
                 $0.weather.wind != nil
             }
             .max { forecast, otherForecast -> Bool in
-                forecast.weather.wind!.speed > otherForecast.weather.wind!.speed
+                forecast.weather.wind!.speed < otherForecast.weather.wind!.speed
             }
             ?? _forecasts.first!
     }

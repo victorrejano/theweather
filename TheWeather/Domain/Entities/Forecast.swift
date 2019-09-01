@@ -13,4 +13,10 @@ struct Forecast {
     let place: Place
     let weather: Weather
     
+    enum Qualifier {
+        case moreWind
+        case moreTemperature
+        case moreRain
+        case moreHumidity
+    }
 }

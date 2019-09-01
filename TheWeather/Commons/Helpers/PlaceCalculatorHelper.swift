@@ -16,6 +16,8 @@ enum CardinalDirection {
     case west
 }
 
+extension CardinalDirection: CaseIterable {}
+
 final class PlaceCalculatorHelper {
     
     static let DEFAULT_DISTANCE: Double = 200000

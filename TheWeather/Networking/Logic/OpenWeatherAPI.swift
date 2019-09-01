@@ -30,6 +30,7 @@ final class OpenWeatherAPI: APIController {
             (key, value) in
             return (URLQueryItem(name: key, value: value))
         })
+        print(components.url ?? "Couldn't build an url")
         return components.url
     }
     

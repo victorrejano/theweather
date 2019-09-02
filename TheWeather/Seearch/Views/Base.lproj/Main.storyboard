@@ -59,6 +59,17 @@
                                     <constraint firstAttribute="height" constant="250" id="vV5-n3-zJs"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F8W-N9-tPM">
+                                <rect key="frame" x="359" y="98" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="NJu-9B-3IS"/>
+                                    <constraint firstAttribute="height" constant="45" id="e2r-Qe-FZB"/>
+                                </constraints>
+                                <state key="normal" image="search-icon" backgroundImage="background-search-button"/>
+                                <connections>
+                                    <action selector="searchButtonSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="odo-uU-4px"/>
+                                </connections>
+                            </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="7uI-Rd-LQG">
                                 <rect key="frame" x="182" y="423" width="50" height="50"/>
                                 <constraints>
@@ -78,7 +89,9 @@
                             <constraint firstAttribute="trailing" secondItem="iBC-gx-RTr" secondAttribute="trailing" constant="10" id="d25-Dh-WXU"/>
                             <constraint firstItem="Gqg-86-n6J" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="eRM-fR-oyz"/>
                             <constraint firstItem="Gqg-86-n6J" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="kYN-LA-Pg6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="F8W-N9-tPM" secondAttribute="trailing" constant="10" id="sRY-iK-INX"/>
                             <constraint firstItem="iBC-gx-RTr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="wQ0-uU-AbI"/>
+                            <constraint firstItem="F8W-N9-tPM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="zzE-gP-xQv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -113,4 +126,8 @@
             <point key="canvasLocation" x="128.98550724637681" y="762.72321428571422"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="background-search-button" width="1000" height="1000"/>
+        <image name="search-icon" width="36" height="36"/>
+    </resources>
 </document>

@@ -102,7 +102,7 @@ extension ForecastTableViewAdapter: UITableViewDataSource, UITableViewDelegate {
         case .moreTemperature:
             return "Highest temperature"
         case .moreWind:
-            return "Highest wind"
+            return "Fastest wind"
         case .moreHumidity:
             return "Highest humidity"
         case .moreRain:

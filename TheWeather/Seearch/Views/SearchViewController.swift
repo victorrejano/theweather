@@ -48,10 +48,6 @@ class SearchViewController: UIViewController {
         let map = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         mapView.addSubview(map)
         
-        // Search button
-        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonSelected(_:)))
-        navigationItem.rightBarButtonItem = searchButton
-        
         // TableView setup
         forecastTableViewAdapter = ForecastTableViewAdapter(delegate: self, tableView: tableView)
         tableView.dataSource = forecastTableViewAdapter
@@ -79,7 +75,7 @@ class SearchViewController: UIViewController {
         marker.snippet = """
         Temperature: \(forecast.weather.temperature!.current) ºC
         Humidity: \(forecast.weather.temperature!.current) %
-        Rain in last hour: \(forecast.weather.rain?.lastHour != nil ? String(forecast.weather.rain!.lastHour) : "-") mm
+        Rain in last hour: \(forecast.weather.rain?.lastHour != nil ? String(forecast.weather.rain!.lastHour) : "0") mm
         Wind: \(forecast.weather.wind?.speed != nil ? String(forecast.weather.wind!.speed) : "-") kms/h
         """
         
@@ -87,9 +83,19 @@ class SearchViewController: UIViewController {
         mapView.selectedMarker = marker
     }
     
-    @objc func searchButtonSelected(_ sender: UIButton) {
+    @IBAction func searchButtonSelected(_ sender: UIButton) {
         
         let autocompleteView = googleSearchController.setupAutocomplete()
+        
+        // Configure controller to show as popover
+        autocompleteView.modalPresentationStyle = .popover
+        
+        let popover = autocompleteView.popoverPresentationController!
+        popover.delegate = self
+        popover.permittedArrowDirections = .up
+        
+        popover.sourceView = sender
+        popover.sourceRect = sender.bounds
         
         // Display the autocomplete view controller.
         present(autocompleteView, animated: true, completion: nil)
@@ -176,5 +182,11 @@ extension SearchViewController: GoogleSearchControllerDelegate {
                 self?.hideLoadingView()
                 self?.showErrorView()
         })
+    }
+}
+
+extension SearchViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
     }
 }

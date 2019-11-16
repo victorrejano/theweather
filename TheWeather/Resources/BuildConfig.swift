@@ -14,6 +14,6 @@ struct OpenWeatherAPIConstants {
 }
 
 struct GoogleServicesConstants {
-    static let API_KEY: String = "AIzaSyAyVXw-kLgFpPz_2nvrmz0svqU1vy89fo0"
+    static let API_KEY: String = "AIzaSyDQM7vcVug2uYBznKJ2ZoMnxzrvovZpzLU"
     static let DEFAULT_MAP_ZOOM: Float = 6.0
 }

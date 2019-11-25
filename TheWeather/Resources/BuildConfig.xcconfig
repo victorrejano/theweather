@@ -1,0 +1,12 @@
+//
+//  BuildConfig.xcconfig
+//  TheWeather
+//
+//  Created by Victor Rejano on 25/11/2019.
+//  Copyright © 2019 Victor Rejano. All rights reserved.
+//
+
+// You should replace this key values with your keys
+OPEN_WEATHER_URL = api.openweathermap.org
+OPEN_WEATHER_API_KEY =
+GOOGLE_SERVICE_API_KEY =

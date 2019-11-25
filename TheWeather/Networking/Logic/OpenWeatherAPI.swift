@@ -11,11 +11,11 @@ import Foundation
 final class OpenWeatherAPI: APIController {
     
     var _urlBase: String {
-        return OpenWeatherAPIConstants.URL_BASE
+        return Environment.OpenWeather.rootURL
     }
     
     var _apiKey: String {
-        return OpenWeatherAPIConstants.API_KEY
+        return Environment.OpenWeather.apiKey
     }
     
     func getURL(params: APIParams, path: String) -> URL? {

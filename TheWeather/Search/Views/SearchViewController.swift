@@ -59,7 +59,7 @@ class SearchViewController: UIViewController {
     }
     
     fileprivate func moveMapPositionTo(place: Place) {
-        let camera = GMSCameraPosition.camera(withLatitude: place.location.lat, longitude: place.location.lon, zoom: GoogleServicesConstants.DEFAULT_MAP_ZOOM)
+        let camera = GMSCameraPosition.camera(withLatitude: place.location.lat, longitude: place.location.lon, zoom: 6.0)
         mapView.camera = camera
         mapView.animate(to: camera)
     }

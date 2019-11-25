@@ -39,5 +39,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>OPEN_WEATHER_API_KEY</key>
+	<string>$(OPEN_WEATHER_API_KEY)</string>
+	<key>OPEN_WEATHER_URL</key>
+	<string>$(OPEN_WEATHER_URL)</string>
+	<key>GOOGLE_SERVICE_API_KEY</key>
+	<string>$(GOOGLE_SERVICE_API_KEY)</string>
 </dict>
 </plist>
